@@ -1,0 +1,121 @@
+<?php
+
+session_start();
+
+$error = $_SESSION['error'] ?? '';
+$success = $_SESSION['success'] ?? '';
+
+unset($_SESSION['error'], $_SESSION['success']);
+
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Warehouses System</title>
+
+
+</head>
+
+<body>
+
+    <h1>Warehouses System</h1>
+
+    <div class="menu">
+
+        <div class="menu-option"><button>Warehouses</button>
+            <div class="dropdown">
+                <a href="?page=showWarehouses">SHOW</a>
+                <a href="?page=addWarehouse">ADD</a>
+                <a href="?page=uptWarehouse">UPDATE</a>
+                <a href="?page=delWarehouse">DELETE</a>
+            </div>
+        </div>
+        <div class="menu-option"><button>Products</button>
+            <div class="dropdown">
+                <a href="?page=showProducts">SHOW</a>
+                <a href="?page=addProduct">ADD</a>
+                <a href="?page=uptProduct">UPDATE</a>
+                <a href="?page=delProduct">DELETE</a>
+            </div>
+        </div>
+        <div class="menu-option"><button>Stock</button></div>
+        <div class="menu-option"><button>Transfer</button></div>
+        <div class="menu-option"><button>History</button></div>
+        <div class="menu-option"><button>Statistic</button></div>
+        <div class="dropdown">
+            <a>For one</a>
+            <a>For all</a>
+        </div>
+    </div>
+
+    </div>
+
+
+    <div class="main">
+
+        <?php if ($error): ?>
+            <div class="error">
+                <?php echo $error; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($success): ?>
+            <div class="success">
+                <?php echo $success; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php
+        $page = $_GET['page'] ?? null;
+
+        switch ($page) {
+            case 'showWarehouses':
+                include 'Logic/showWarehouses.php';
+                break;
+
+            case 'addWarehouse':
+                include 'Logic/addWarehouse.php';
+                break;
+
+            case 'uptWarehouse':
+                include 'Forms/Warehouses/uptWarehouse.html';
+                break;
+
+            case 'delWarehouse':
+                include 'Forms/Warehouses/delWarehouse.html';
+                break;
+
+            case 'showProducts':
+                include 'Logic/showProducts.php';
+                break;
+
+            case 'addProduct':
+                include 'Forms/Products/addProduct.html';
+                break;
+
+            case 'uptProduct':
+                include 'Forms/Products/uptProduct.html';
+                break;
+
+            case 'delProduct':
+                include 'Forms/Products/delProduct.html';
+                break;
+        }
+
+
+        ?>
+
+    </div>
+
+
+
+</body>
+
+</html>
