@@ -40,7 +40,7 @@ CREATE TABLE transactions (
 
 
 INSERT INTO warehouses (name, location, capacity) VALUES
-('External', 'Outside System', NULL),
+('Killarney Factory', 'Killarney', 2000),
 ('Central Warehouse', 'Dublin', 1000),
 ('Regional Warehouse', 'Cork', 500),
 ('Tralee Warehouse', 'Tralee', 250),

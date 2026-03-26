@@ -4,8 +4,12 @@ session_start();
 
 $error = $_SESSION['error'] ?? '';
 $success = $_SESSION['success'] ?? '';
+$var = $_SESSION['var'] ?? '';
 
-unset($_SESSION['error'], $_SESSION['success']);
+
+echo "123213: " ;
+
+unset($_SESSION['error'], $_SESSION['success'], $_SESSION['var']);
 
 
 
@@ -33,7 +37,7 @@ unset($_SESSION['error'], $_SESSION['success']);
             <div class="dropdown">
                 <a href="?page=showWarehouses">SHOW</a>
                 <a href="?page=addWarehouse">ADD</a>
-                <a href="?page=uptWarehouse">UPDATE</a>
+                <a href="?page=getWarehouse">UPDATE</a>
                 <a href="?page=delWarehouse">DELETE</a>
             </div>
         </div>
@@ -84,8 +88,12 @@ unset($_SESSION['error'], $_SESSION['success']);
                 include 'Logic/addWarehouse.php';
                 break;
 
+            case 'getWarehouse':
+                include 'Logic/getWarehouse.php';
+                break;
+            
             case 'uptWarehouse':
-                include 'Forms/Warehouses/uptWarehouse.html';
+                include 'Logic/uptWarehouse.php';
                 break;
 
             case 'delWarehouse':
