@@ -45,7 +45,7 @@ unset($_SESSION['error'], $_SESSION['success'], $_SESSION['var']);
             <div class="dropdown">
                 <a href="?page=showProducts">SHOW</a>
                 <a href="?page=addProduct">ADD</a>
-                <a href="?page=uptProduct">UPDATE</a>
+                <a href="?page=getProduct">UPDATE</a>
                 <a href="?page=delProduct">DELETE</a>
             </div>
         </div>
@@ -107,9 +107,13 @@ unset($_SESSION['error'], $_SESSION['success'], $_SESSION['var']);
             case 'addProduct':
                 include 'Logic/addProduct.php';
                 break;
+            
+            case 'getProduct';
+                include 'Logic/getProduct.php';
+                break;
 
             case 'uptProduct':
-                include 'Forms/Products/uptProduct.html';
+                include 'Logic/uptProduct.php';
                 break;
 
             case 'delProduct':

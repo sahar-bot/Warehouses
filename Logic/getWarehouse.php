@@ -20,7 +20,7 @@
             $warehouse = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$warehouse) {
-                $_SESSION['error'] = "Id is required";
+                $_SESSION['error'] = "Id must exist";
                 header("Location: ../menu.php?page=getWarehouse");
             }
 
