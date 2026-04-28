@@ -7,7 +7,7 @@ $success = $_SESSION['success'] ?? '';
 $var = $_SESSION['var'] ?? '';
 
 
-echo "123213: " ;
+echo "123213:" ;
 
 unset($_SESSION['error'], $_SESSION['success'], $_SESSION['var']);
 
@@ -105,7 +105,7 @@ unset($_SESSION['error'], $_SESSION['success'], $_SESSION['var']);
                 break;
 
             case 'addProduct':
-                include 'Forms/Products/addProduct.html';
+                include 'Logic/addProduct.php';
                 break;
 
             case 'uptProduct':
@@ -113,7 +113,7 @@ unset($_SESSION['error'], $_SESSION['success'], $_SESSION['var']);
                 break;
 
             case 'delProduct':
-                include 'Forms/Products/delProduct.html';
+                include 'Logic/delProduct.php';
                 break;
         }
 

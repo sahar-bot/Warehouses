@@ -1,0 +1,35 @@
+<?php
+    include "Forms/Products/delProduct.html";
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        try {
+            session_start();
+
+            $id = $_POST['id'];
+
+            if (empty($id)) {
+                $_SESSION["error"] = "Id must be filled";
+            }
+            
+            $pdo = new PDO('mysql:host=localhost;dbname=warehouses; charset=utf8', 'root', '');
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
+            $stmt->execute([$id]);
+            $record = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($record) {
+                $stmt = $pdo->prepare("DELETE FROM products WHERE id = ?");
+                $stmt->execute([$id]);
+                $_SESSION['success'] = "Product has been deleted";
+                header("Location: ../menu.php?page=showProducts");
+            }
+            
+
+        } catch(PDOException $e) {
+            $_SESSION["error"] = "Database error";
+            header("Location: ../menu.php?page=delProduct");
+        }
+    }
+
+
+?>
