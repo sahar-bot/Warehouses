@@ -17,10 +17,11 @@ try {
                 <th>Name</th>
                 <th>Location</th>
                 <th>Capacity</th>
+                <th>Reserved</th>
             </tr>';
 
     while($row=$result->fetch()){
-        echo '<tr><td>' . $row['id'] . '</td><td>' . $row['name'] . '</td><td> ' . $row['location'] . '</td><td>' . $row['capacity'] . '</td></tr>';               
+        echo '<tr><td>' . $row['id'] . '</td><td>' . $row['name'] . '</td><td> ' . $row['location'] . '</td><td>' . $row['capacity'] . '</td><td>' . $row['reserved'] . '</td></tr>';               
     }
 
     echo '</table>';
@@ -28,8 +29,6 @@ try {
 }
 
 catch(PDOException $e) {
-    $output = 'Unable to connect' . $e;
-
-    echo $output;
+    echo "<div class='error'>Unable to connect to database</div>";
 }
 ?>

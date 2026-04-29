@@ -5,7 +5,8 @@ CREATE TABLE warehouses (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     location VARCHAR(100),
-    capacity INT
+    capacity INT,
+    reserved INT DEFAULT 0
 ) ;
 
 CREATE TABLE products (

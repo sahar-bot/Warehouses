@@ -29,8 +29,6 @@ try {
 }
 
 catch(PDOException $e) {
-    $output = 'Unable to connect' . $e;
-
-    echo $output;
+    echo "<div class='error'>Unable to connect to database</div>";
 }
 ?>

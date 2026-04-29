@@ -49,9 +49,9 @@ unset($_SESSION['error'], $_SESSION['success'], $_SESSION['var']);
                 <a href="?page=delProduct">DELETE</a>
             </div>
         </div>
-        <div class="menu-option"><button>Stock</button></div>
-        <div class="menu-option"><button>Transfer</button></div>
-        <div class="menu-option"><button>History</button></div>
+        <div class="menu-option"><button onclick="location.href='?page=showStock'">Stock</button></div>
+        <div class="menu-option"><button onclick="location.href='?page=transfer'">Transfer</button></div>
+        <div class="menu-option"><button onclick="location.href='?page=transactions'">Transactions</button></div>
         <div class="menu-option"><button>Statistic</button></div>
         <div class="dropdown">
             <a>For one</a>
@@ -118,6 +118,18 @@ unset($_SESSION['error'], $_SESSION['success'], $_SESSION['var']);
 
             case 'delProduct':
                 include 'Logic/delProduct.php';
+                break;
+            
+            case 'showStock':
+                include 'Logic/showStock.php';
+                break;
+
+            case 'transfer':
+                include 'Logic/transfer.php';
+                break;
+
+            case 'transactions':
+                include 'Logic/transactions.php';
                 break;
         }
 
