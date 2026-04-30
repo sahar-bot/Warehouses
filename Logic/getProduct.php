@@ -16,7 +16,7 @@
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $stmt = $pdo->prepare("SELECT * FROM Products WHERE id = ?");
-            $stmt->execute(["$id"]);
+            $stmt->execute([$id]);
             $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if(!$product) {

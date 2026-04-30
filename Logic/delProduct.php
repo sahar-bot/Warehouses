@@ -17,12 +17,27 @@
             $stmt->execute([$id]);
             $record = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($record) {
-                $stmt = $pdo->prepare("DELETE FROM products WHERE id = ?");
-                $stmt->execute([$id]);
-                $_SESSION['success'] = "Product has been deleted";
+            if (!$record) {
+                $_SESSION['error'] = "Sorry the product doesn't exist";
                 header("Location: ../menu.php?page=showProducts");
+                exit;
             }
+
+            $stmt = $pdo->prepare("SELECT * FROM warehouse_stock WHERE product_id = ?");
+            $stmt->execute([$id]);
+            $record = $stmt->fetch();
+
+            if ($record) {
+                $_SESSION['error'] = "The product is used on one of the warehouses with id: " . $record['warehouse_id'];
+                header("Location: ../menu.php?page=showStock");
+                exit;
+            }
+
+            $stmt = $pdo->prepare("DELETE FROM products WHERE id = ?");
+            $stmt->execute([$id]);
+            $_SESSION['success'] = "Product has been deleted";
+            header("Location: ../menu.php?page=showProducts");
+
             
 
         } catch(PDOException $e) {

@@ -86,7 +86,7 @@
 
         try {
 
-        $pdo->beginTransaction();
+        $pdo->beginTransaction();  // boldy stolen from here: https://www.php.net/manual/en/pdo.transactions.php
 
         $stmt = $pdo->prepare("UPDATE warehouse_stock SET quantity = quantity - ? WHERE warehouse_id = ? AND product_id = ?");
         $stmt->execute([$qty, $from, $product]);
@@ -103,14 +103,14 @@
         $stmt = $pdo->prepare("INSERT INTO transactions (product_id, warehouse_from, warehouse_to, quantity) VALUES (?, ?, ?, ?)");
         $stmt->execute([$product, $from, $to, $qty]);
 
-        $pdo->commit();
+        $pdo->commit(); // boldy stolen from here: https://www.php.net/manual/en/pdo.transactions.php
 
         $_SESSION['success'] = "Transfer completed successfully";
         header("Location: ../menu.php?page=showStock");
         exit;
 
         } catch(Exception $e) {
-            $pdo->rollBack();
+            $pdo->rollBack(); // boldy stolen from here: https://www.php.net/manual/en/pdo.transactions.php
             $_SESSION['error'] = "Transfer failed";
             header("Location: ../menu.php?page=transfer");
             exit;

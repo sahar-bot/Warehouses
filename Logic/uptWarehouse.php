@@ -20,6 +20,16 @@
             $pdo = new PDO('mysql:host=localhost;dbname=warehouses; charset=utf8', 'root', '');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+            $stmt = $pdo->prepare("SELECT * FROM warehouses WHERE id = ?");
+            $stmt->execute([$id]);
+            $warehouse = $stmt->fetch();
+
+            if ($capacity < $warehouse['reserved']) {
+                $_SESSION['error'] = "Sorry but the amount of space that is currently reserved bigger than the new capacity amount";
+                header("Location: ../menu.php?page=showWarehouses");
+                exit;
+            }
+
             $stmt = $pdo->prepare("UPDATE warehouses SET name = ?, location = ?, capacity = ? WHERE id = ?");
             $stmt->execute([$name, $location, $capacity, $id]);
 
