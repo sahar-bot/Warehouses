@@ -14,6 +14,18 @@
                 exit;
             }
 
+            if (!is_numeric($cost) || $cost <= 0) {
+                $_SESSION['error'] = "Cost must be a positive number";
+                header("Location: ../menu.php?page=addProduct");
+                exit;
+            }
+
+            if ($space <= 0) {
+                $_SESSION['error'] = "Space must be a positive integer";
+                header("Location: ../menu.php?page=addProduct");
+                exit;
+            }
+
             $pdo = new PDO('mysql:host=localhost;dbname=warehouses; charset=utf8', 'root', '');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

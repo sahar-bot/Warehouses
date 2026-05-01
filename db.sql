@@ -39,13 +39,20 @@ CREATE TABLE transactions (
     FOREIGN KEY (warehouse_to) REFERENCES warehouses(id)
 ) ;
 
+CREATE TABLE users (
+    name VARCHAR(50) PRIMARY KEY,
+    password VARCHAR(20)
+);
 
-INSERT INTO warehouses (name, location, capacity) VALUES
-('Killarney Factory', 'Killarney', 2000),
-('Central Warehouse', 'Dublin', 1000),
-('Regional Warehouse', 'Cork', 500),
-('Tralee Warehouse', 'Tralee', 250),
-('Killarney Warehouse', 'Killarney', 250);
+INSERT INTO users (name, password) VALUES ('Test', 'test123');
+
+
+INSERT INTO warehouses (name, location, capacity, reserved) VALUES
+('Killarney Factory', 'Killarney', 2000, 300),
+('Central Warehouse', 'Dublin', 1000, 1500),
+('Regional Warehouse', 'Cork', 500, 300),
+('Tralee Warehouse', 'Tralee', 250, 0),
+('Killarney Warehouse', 'Killarney', 250, 0);
 
 INSERT INTO products (name, description, cost, space) VALUES
 ('Computer', 'Desktop Computer', 1000.00, 5),
@@ -53,6 +60,7 @@ INSERT INTO products (name, description, cost, space) VALUES
 ('Vacuum Cleaner', 'Home Vacuum Cleaner', 300.00, 2);
 
 INSERT INTO warehouse_stock (warehouse_id, product_id, quantity) VALUES
+(1, 2, 100),
 (2, 1, 300),
 (3, 2, 100);
 
@@ -66,5 +74,4 @@ INSERT INTO transactions (product_id, warehouse_from, warehouse_to, quantity) VA
 
 
 
-2 ways to solve the problem: 
 

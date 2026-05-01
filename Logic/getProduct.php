@@ -12,6 +12,12 @@
                 exit;
             }
 
+            if (!is_numeric($id) || $id < 0) {
+                $_SESSION['error'] = "Id must be numeric and positive integer";
+                header("Location: ../menu.php?page=getProduct"); 
+                exit;
+            }
+
             $pdo = new PDO('mysql:host=localhost;dbname=warehouses; charset=utf8', 'root', '');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

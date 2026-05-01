@@ -1,13 +1,16 @@
 <?php
 
 session_start();
-
+$access = $_SESSION['access'];
+if (!$access) {
+    $_SESSION['error'] = "Can't acess this page without logging in";
+    header("Location: index.php");
+    exit;
+}
 $error = $_SESSION['error'] ?? '';
 $success = $_SESSION['success'] ?? '';
 $var = $_SESSION['var'] ?? '';
 
-
-echo "123213:" ;
 
 unset($_SESSION['error'], $_SESSION['success'], $_SESSION['var']);
 
@@ -52,11 +55,9 @@ unset($_SESSION['error'], $_SESSION['success'], $_SESSION['var']);
         <div class="menu-option"><button onclick="location.href='?page=showStock'">Stock</button></div>
         <div class="menu-option"><button onclick="location.href='?page=transfer'">Transfer</button></div>
         <div class="menu-option"><button onclick="location.href='?page=transactions'">Transactions</button></div>
-        <div class="menu-option"><button>Statistic</button></div>
-        <div class="dropdown">
-            <a>For one</a>
-            <a>For all</a>
-        </div>
+        <div class="menu-option"><button onclick="location.href='?page=simulate'">Simulate</button></div>
+        <div class="menu-option"><button onclick="location.href='?page=logout'">Exit</button></div>
+        
     </div>
 
     </div>
@@ -131,6 +132,15 @@ unset($_SESSION['error'], $_SESSION['success'], $_SESSION['var']);
             case 'transactions':
                 include 'Logic/transactions.php';
                 break;
+            
+            case 'simulate':
+                include 'Logic/simulate.php';
+                break;
+
+            case 'logout':
+                session_destroy();
+                header("Location: index.php");
+                exit;
         }
 
 

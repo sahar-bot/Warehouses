@@ -11,34 +11,17 @@
                 $_SESSION['error'] = "Id is empty";
                 header('Location: ../menu.php?page=delWarehouse');
                 exit;
-                
+            }
+
+            if (!is_numeric($id) || $id < 0) {
+                $_SESSION['error'] = "Id must be numeric and positive integer";
+                header("Location: ../menu.php?page=delWarehouse"); 
+                exit;
             }
             else {
 
                 $pdo = new PDO('mysql:host=localhost;dbname=warehouses; charset=utf8', 'root', '');
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                // $sql = 'SELECT count(*) FROM warehouses where id = :id';
-
-                // $stmt = $pdo->prepare($sql);
-
-                // $stmt->bindValue(':id', $id);
-
-                // $stmt->execute();
-
-                // if($stmt->fetchColumn() > 0) {
-                //     $sql = 'DELETE FROM warehouses WHERE id = :id';
-                //     $stmt = $pdo->prepare($sql);
-                //     $stmt->bindValue(':id', $id);
-                //     $stmt->execute();
-
-                //     $_SESSION['success'] = "Warehouse has been deleted";
-                // }
-                // else {
-                //     $_SESSION['error'] = "Warehouse not found";
-                // }
-                // header('Location: ../menu.php?page=delWarehouse');
-                // exit;
 
                 $stmt = $pdo->prepare("SELECT * FROM warehouses WHERE id = ?");
                 $stmt->execute([$id]);

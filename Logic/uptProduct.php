@@ -17,6 +17,18 @@
                 exit;
             }
 
+            if (!is_numeric($cost) || $cost <= 0) {
+                $_SESSION['error'] = "cost must be numeric and positive integer";
+                header("Location: ../menu.php?page=uptProduct");
+                exit;
+            }
+
+            if (!is_numeric($space) || $space <= 0) {
+                $_SESSION['error'] = "space must be numeric and positive integer";
+                header("Location: ../menu.php?page=uptProduct"); 
+                exit;
+            }
+
             $pdo = new PDO('mysql:host=localhost;dbname=warehouses; charset=utf8', 'root', '');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -33,7 +45,7 @@
             $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             try {
-                $pdo->beginTransaction();   // boldy stolen from here: https://www.php.net/manual/en/pdo.transactions.php
+                $pdo->beginTransaction();   // boldy stolen from here: https://www.php.net/manual/en/pdo.transactions.php has been last checked 30.04.2026
                 if ($delta < 0) {
                     foreach($records as $record) {
                         $stmt = $pdo->prepare("SELECT capacity, reserved FROM warehouses WHERE id = ?");
@@ -66,13 +78,13 @@
                 $stmt = $pdo->prepare("UPDATE products SET name = ?, description = ?, cost = ?, space = ? WHERE id = ?");
                 $stmt->execute([$name, $description, $cost, $space, $id]);
 
-                $pdo->commit(); // boldy stolen from here: https://www.php.net/manual/en/pdo.transactions.php
+                $pdo->commit(); // boldy stolen from here: https://www.php.net/manual/en/pdo.transactions.php has been last checked 30.04.2026
 
                 $_SESSION['success'] = "Product updated";
                 header("Location: ../menu.php?page=showProducts");
                 exit;
             } catch(Exception $e) {
-                $pdo->rollBack();
+                $pdo->rollBack();  // boldy stolen from here: https://www.php.net/manual/en/pdo.transactions.php has been last checked 30.04.2026
                 $_SESSION['error'] = "Database error";
 
             }

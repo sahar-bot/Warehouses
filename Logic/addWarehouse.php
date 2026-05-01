@@ -12,6 +12,12 @@
                 header("Location: ../menu.php?page=addWarehouse");
                 exit;
             }
+
+            else if (!is_numeric($capacity) || $capacity <= 0){
+                $_SESSION['error'] = "Capacity must be positive";
+                header("Location: ../menu.php?page=addWarehouse"); 
+                exit;
+            }
             
             else {
 

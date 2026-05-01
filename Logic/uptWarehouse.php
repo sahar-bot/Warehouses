@@ -17,6 +17,12 @@
                 exit;
             }
 
+            if (!is_numeric($capcity) || $capacity <= 0) {
+                $_SESSION['error'] = "capacity must be numeric and positive integer";
+                header("Location: ../menu.php?page=uptWarehouse"); 
+                exit;
+            }
+
             $pdo = new PDO('mysql:host=localhost;dbname=warehouses; charset=utf8', 'root', '');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
